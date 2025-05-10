@@ -1,0 +1,13 @@
+Pantalones,
+Camisas,
+Camisetas,
+Chandals,
+Mallas,
+Sudaderas,
+Chaquetas,
+Forros polares,
+Chalecos,
+Abrigos,
+Jerseys,
+Corbatas,
+Zapatos
