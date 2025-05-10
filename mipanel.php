@@ -51,7 +51,7 @@ $palabras_clave = [
         'ingles' => 'English',
         'Cambiar idioma' => 'Change Language',
         'panel' => 'Main Panel',
-        'bienvenido' => 'Welcome',
+        'bienvenido' => 'Welcome user:',
         'usuario' => 'User',
         'cerrar_sesion' => 'Log Out',
         'idioma' => 'Language',
@@ -67,8 +67,7 @@ $palabras_clave = [
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><?php echo $palabras_clave[$language]['bienvenido']; ?><?php echo $_SESSION["usuario"] ?></title>
-    <style>
+    <title><?php echo $palabras_clave[$language]['bienvenido'];  ?> <?php echo htmlspecialchars($_SESSION["usuario"]); ?></title>    <style>
         /* Estilo para que las categorías parezcan clickeables */
         .clickable {
             cursor: pointer;
