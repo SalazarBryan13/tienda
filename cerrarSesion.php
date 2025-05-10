@@ -21,5 +21,4 @@ setcookie(session_name(), '', time() - 42000,
 
 // Redirecciona a la página principal
 header("Location:index.php");
-exit();  adicional del código
 ?>
