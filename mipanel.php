@@ -8,16 +8,19 @@ if(!isset($_SESSION["usuario"]) || $_SESSION["usuario"] == ""){
 // Determinar el idioma
 
 // Determinar el idioma
-if (isset($_GET['lang']) && $_COOKIE['recordar'] === 'true') {
-    // Solo guardar cookie si el usuario seleccionó recordar
+if (isset($_GET['lang'])) {
     $language = $_GET['lang'];
-    setcookie('lang', $language, time() + (86400 * 30), "/");
-} elseif (isset($_GET['lang'])) {
-    // Usar el idioma seleccionado pero sin guardar cookie
-    $language = $_GET['lang'];
+    // Solo guardar la cookie 'lang' si el usuario marcó "Recordarme"
+    if (isset($_COOKIE['recordar']) && $_COOKIE['recordar'] === 'true') {
+        setcookie('lang', $language, time() + (86400 * 30), "/");
+    }
+} elseif (isset($_COOKIE['lang']) && isset($_COOKIE['recordar']) && $_COOKIE['recordar'] === 'true') {
+    // Usar la cookie 'lang' solo si existe y si "Recordarme" está marcado
+    $language = $_COOKIE['lang'];
 } else {
     $language = 'es'; // Idioma por defecto
 }
+
 
 // Leer categorías según el idioma
 $categories_file = "datos/categorias_{$language}.txt";
@@ -36,7 +39,7 @@ $palabras_clave = [
         'español' => 'Español',
         'Cambiar idioma' => 'Cambiar idioma',
         'panel' => 'Panel Principal',
-        'bienvenido' => 'Bienvenido:',
+        'bienvenido' => 'Bienvenido usuario:',
         'usuario' => 'Usuario',
         'cerrar_sesion' => 'Cerrar Sesión',
         'idioma' => 'Idioma',
@@ -85,7 +88,8 @@ $palabras_clave = [
 </head>
 <body>
      <header>
-        <h1><?php echo $palabras_clave[$language]['bienvenido']; ?> <?php echo htmlspecialchars($_SESSION["usuario"]); ?></h1>
+        <h1><?php echo $palabras_clave[$language]['panel']; ?></h1>
+        <h2><?php echo $palabras_clave[$language]['bienvenido']; ?> <?php echo htmlspecialchars($_SESSION["usuario"]); ?></h1>
     </header>
     
     <p>
