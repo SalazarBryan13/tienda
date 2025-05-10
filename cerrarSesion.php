@@ -1,18 +1,17 @@
-
 <?php
 session_start();
 session_destroy();
 
-// Properly delete the "lang" cookie by setting expiration in the past
-// AND specifying the same path as when it was created
+// Elimina correctamente la cookie "lang"
 if ($_COOKIE['recordar'] != 'true') {
-    setcookie('lang', '', time() - 3600, '/');
-    setcookie("recordar", '', time() - 3600, "/");
-
+    setcookie('lang', '', time() - 3600, '/'); // Borra la cookie "lang"
+    setcookie("recordar", '', time() - 3600, "/"); // Borra la cookie "recordar"
 }
 
+// Obtiene los parámetros de la cookie de sesión
 $params = session_get_cookie_params();
-// Borrar la cookie de sesión estableciéndola en el pasado
+
+// Borra la cookie de sesión 
 setcookie(session_name(), '', time() - 42000,
     $params["path"],
     $params["domain"],
@@ -20,6 +19,7 @@ setcookie(session_name(), '', time() - 42000,
     $params["httponly"]
 );
 
+// Redirecciona a la página principal
 header("Location:index.php");
-exit(); // Always add exit after redirect to prevent further code execution
+exit();  adicional del código
 ?>
